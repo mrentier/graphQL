@@ -20,14 +20,16 @@ We won't go into a comparison with for example REST APIs, but in general GraphQL
 
 ## Collections
 
-<a href="https://graphql-dotnet.github.io">GraphQL DotNet</a> provides documentation and samples that cover a variety of scenarios. One of the more complex scenarios deals with <A href="https://relay.dev/graphql/connections.htm">connections</a>. A major use case for connections is a standardized solution for cursor-based paging through a collection. It is a common scenario to provide paging so the consumer can efficiently interact with larger result sets.
-The <a href="https://github.com/graphql-dotnet/relay">Relay project</a> provides an out-of-the-box solution for collections when the dataset is in memory. In practice however, you will have a persistent data store that you want to query. You will need to provide your own implementation of the required data retrieval according to the GraphQL specification for connections.
-GraphQL connections provide the following benefits:
+<a href="https://graphql-dotnet.github.io">GraphQL DotNet</a> provides documentation and samples that cover a variety of scenarios. One of the more complex scenarios deals with <A href="https://relay.dev/graphql/connections.htm">connections</a>. A major use case for connections is a standardized solution for cursor-based paging through a collection. Paging is commonly provided so the consumer can efficiently interact with larger result sets. GraphQL connections provide the following benefits:
 - The ability to paginate through the list.
 - The ability to ask for information about the connection itself, like totalCount or pageInfo.
 - The ability to ask for information about the edge itself, like cursor or friendshipTime.
 - The ability to change how our backend does pagination, since the user just uses opaque cursors.
 A connection will return the total count, the page information and a set of edges, each edge existing out of a cursor and an entity.
+
+
+The <a href="https://github.com/graphql-dotnet/relay">Relay project</a> provides an out-of-the-box solution for collections when the dataset is in memory. In practice however, you will not have the full dataset in memory and want to efficiently query a persistent data store. GraphQL does not provide a standard implementation for interacting with persistent data stores. When implementing the data store queries you will need to ensure that you meet the connections specification.
+
 ```csharpTime 
     public class WidgetType : ObjectGraphType<Widget> { 
         public WidgetType()
