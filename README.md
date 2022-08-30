@@ -1,6 +1,7 @@
 # GraphQL.NET Connections
 
 ##Introduction
+
 GraphQL was created by Facebook and later open sourced. GraphQL represents your data as a queryable graph. The main benefits are:
 - GraphQL provides you a single endpoint that allows you to interact with types and fields. Don't focus on how to use multiple endpoints (and multiple requests).
 - GraphQL allows you to specify the data you need and nothing more than that. The consumer drives the representation.
@@ -16,6 +17,7 @@ We won't go into a comparison with for example REST APIs, but in general GraphQL
 - The subscription model provides desired functionality.
 
 ##Collections
+
 <a href="https://graphql-dotnet.github.io">GraphQL DotNet</a> provides documentation and samples that cover a variety of scenarios. One of the more complex scenarios that is, for good reasons, not fully covered is the concept of <A href="https://relay.dev/graphql/connections.htm">connections</a>. A major use case for connections is a standardized solution for cursor-based paging through a collection.
 The <a href="https://github.com/graphql-dotnet/relay">Relay project</a> provides an out-of-the-box solution when the whole dataset is in memory. In practice however, you will have a persistent data store that you want to query. You will need to provide your own implementation of the required data retrieval according to the GraphQL specification for connections.
 GraphQL connections provide the following benefits:
