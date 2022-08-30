@@ -109,9 +109,9 @@ A connection will return the total count, the page information and a set of edge
         }
 
 '''
-'''
+
 Note that GraphQL implements cursor-based pagination. The cursors are opaque, either offset or ID-based pagination can be implemented.
-The <a href="https://relay.dev/graphql/connections.htm>specification</a> states in particular that:
+The <a href="https://relay.dev/graphql/connections.htm">specification</a> states in particular that:
 - The ordering of edges should be the same when using first/after as when using last/before, all other arguments being equal.
 - hasPreviousPage is used to indicate whether more edges exist prior to the set defined by the clients arguments. If the client is paginating with last/before, then the server must return true if prior edges exist, otherwise false. If the client is paginating with first/after, then the client may return true if edges prior to after exist, if it can do so efficiently, otherwise may return false. 
 - hasNextPage is used to indicate whether more edges exist following the set defined by the clients arguments. If the client is paginating with first/after, then the server must return true if further edges exist, otherwise false. If the client is paginating with last/before, then the client may return true if edges further from before exist, if it can do so efficiently, otherwise may return false.
