@@ -1,6 +1,6 @@
 # GraphQL.NET Connections
 
-##Introduction
+## Introduction
 
 GraphQL was created by Facebook and later open sourced. GraphQL represents your data as a queryable graph. The main benefits are:
 - GraphQL provides you a single endpoint that allows you to interact with types and fields. Don't focus on how to use multiple endpoints (and multiple requests).
@@ -16,7 +16,7 @@ We won't go into a comparison with for example REST APIs, but in general GraphQL
 - Consumers that require rich interactions with the data (filtering of data, model-based queries).
 - The subscription model provides desired functionality.
 
-##Collections
+## Collections
 
 <a href="https://graphql-dotnet.github.io">GraphQL DotNet</a> provides documentation and samples that cover a variety of scenarios. One of the more complex scenarios that is, for good reasons, not fully covered is the concept of <A href="https://relay.dev/graphql/connections.htm">connections</a>. A major use case for connections is a standardized solution for cursor-based paging through a collection.
 The <a href="https://github.com/graphql-dotnet/relay">Relay project</a> provides an out-of-the-box solution when the whole dataset is in memory. In practice however, you will have a persistent data store that you want to query. You will need to provide your own implementation of the required data retrieval according to the GraphQL specification for connections.
@@ -26,7 +26,7 @@ GraphQL connections provide the following benefits:
 - The ability to ask for information about the edge itself, like cursor or friendshipTime.
 - The ability to change how our backend does pagination, since the user just uses opaque cursors.
 A connection will return the total count, the page information and a set of edges, each edge existing out of a cursor and an entity.
-'''code
+```csharpTime 
     public class WidgetType : ObjectGraphType<Widget> { 
         public WidgetType()
         {            
@@ -107,8 +107,7 @@ A connection will return the total count, the page information and a set of edge
                 TotalCount = totalCount
             };
         }
-
-'''
+```
 
 Note that GraphQL implements cursor-based pagination. The cursors are opaque, either offset or ID-based pagination can be implemented.
 The <a href="https://relay.dev/graphql/connections.htm">specification</a> states in particular that:
