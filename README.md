@@ -16,10 +16,12 @@ We won't go into a comparison with for example REST APIs, but in general GraphQL
 - Consumers that require rich interactions with the data (filtering of data, model-based queries).
 - The subscription model provides desired functionality.
 
+<a href="https://graphql.org/learn/">The GraphQL site</a> provides a great learning resource. A GraphQL service is created by defining types and fields on those types.  There are two special types in a GraphQL service: a required Query type and an optional Mutation type. These types are the same as a regular object type, but they are special because they define the entry point of every GraphQL query. In our example below we will introduce a widget type with two fields and define a schema that provides the required query type.
+
 ## Collections
 
-<a href="https://graphql-dotnet.github.io">GraphQL DotNet</a> provides documentation and samples that cover a variety of scenarios. One of the more complex scenarios that is, for good reasons, not fully covered is the concept of <A href="https://relay.dev/graphql/connections.htm">connections</a>. A major use case for connections is a standardized solution for cursor-based paging through a collection.
-The <a href="https://github.com/graphql-dotnet/relay">Relay project</a> provides an out-of-the-box solution when the whole dataset is in memory. In practice however, you will have a persistent data store that you want to query. You will need to provide your own implementation of the required data retrieval according to the GraphQL specification for connections.
+<a href="https://graphql-dotnet.github.io">GraphQL DotNet</a> provides documentation and samples that cover a variety of scenarios. One of the more complex scenarios deals with <A href="https://relay.dev/graphql/connections.htm">connections</a>. A major use case for connections is a standardized solution for cursor-based paging through a collection. It is a common scenario to provide paging so the consumer can efficiently interact with larger result sets.
+The <a href="https://github.com/graphql-dotnet/relay">Relay project</a> provides an out-of-the-box solution for collections when the dataset is in memory. In practice however, you will have a persistent data store that you want to query. You will need to provide your own implementation of the required data retrieval according to the GraphQL specification for connections.
 GraphQL connections provide the following benefits:
 - The ability to paginate through the list.
 - The ability to ask for information about the connection itself, like totalCount or pageInfo.
