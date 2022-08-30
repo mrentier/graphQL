@@ -107,6 +107,58 @@ A connection will return the total count, the page information and a set of edge
                 TotalCount = totalCount
             };
         }
+        
+            public static class Cursor
+    {
+        private const string Prefix = "arrayconnection";
+
+        public static T? FromCursor<T>(string? cursor)
+        {
+            if (string.IsNullOrEmpty(cursor))
+                return default;
+
+            string decodedValue;
+            try
+            {
+                decodedValue = Base64Decode(cursor);
+            }
+            catch (FormatException)
+            {
+                return default;
+            }
+
+            var prefixIndex = Prefix.Length + 1;
+            if (decodedValue.Length <= prefixIndex)
+                return default;
+
+            var value = decodedValue.Substring(prefixIndex);
+            return (T)Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
+        }
+
+        public static (string? firstCursor, string? lastCursor) GetFirstAndLastCursor<TItem, TCursor>(
+            IEnumerable<TItem> enumerable,
+            Func<TItem, TCursor> getCursorProperty)
+        {
+           if (enumerable.Count() == 0)
+                return (default,default);
+
+            var firstCursor = ToCursor(getCursorProperty(enumerable.First()));
+            var lastCursor = ToCursor(getCursorProperty(enumerable.Last()));
+            return (firstCursor, lastCursor);
+        }
+
+        public static string ToCursor<T>(T value)
+        {
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
+            return Base64Encode(string.Format(CultureInfo.InvariantCulture, "{0}:{1}", Prefix, value));
+        }
+
+        private static string Base64Decode(string value) => Encoding.UTF8.GetString(Convert.FromBase64String(value));
+
+        private static string Base64Encode(string value) => Convert.ToBase64String(Encoding.UTF8.GetBytes(value));
+    }
 ```
 
 Note that GraphQL implements cursor-based pagination. The cursors are opaque, either offset or ID-based pagination can be implemented.
